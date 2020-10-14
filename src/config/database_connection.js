@@ -1,19 +1,20 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const logger = require("morgan");
+require("dotenv").config();
+const mysql = require("mysql");
 
-const port = 3001;
-
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
-app.use(logger("dev"));
-
-app.listen(port, () => {
-  console.log("Server run on localhost:" + port);
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
+
+connection.connect((error) => {
+  if (!error) {
+    // console.log(process.env.DB_HOST, process.env.DB_NAME)
+    console.log("MySQL Database connection is established");
+  } else {
+    console.log(error);
+    console.log("MySQL Database connection is not established");
+  }
+});
+module.exports = connection;

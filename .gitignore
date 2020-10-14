@@ -3,6 +3,7 @@
 
 # misc
 .env.local
+.env
 
 #folder
 /database
