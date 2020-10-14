@@ -31,9 +31,11 @@ exports.postNewRecipeData = (req, res, next) => {
     "DD-MM-YYYY, HH:mm:ss"
   );
   const recipe_name = req.body.recipe_name;
-  const sell_price = req.body.sell_price;
+  const normal_price = req.body.normal_price;
+  const high_price = req.body.high_price;
   const utensils = req.body.utensils;
   const ingredients = req.body.ingredients;
+  const edible = req.body.edible;
   const stamina_effect = req.body.stamina_effect;
   const fatigue_effect = req.body.fatigue_effect;
   const obtain_method = req.body.obtain_method;
@@ -41,9 +43,11 @@ exports.postNewRecipeData = (req, res, next) => {
 
   const recipeData = {
     recipe_name,
-    sell_price,
+    normal_price,
+    high_price,
     utensils,
     ingredients,
+    edible,
     stamina_effect,
     fatigue_effect,
     obtain_method,
