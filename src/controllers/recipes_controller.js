@@ -5,7 +5,11 @@ const Recipe = require("../models/recipes_model");
 const helper = require("../helpers/responses_helper");
 
 exports.getAllRecipes = (req, res, next) => {
-  Recipe.getAllRecipesData()
+  const search = req.query.search || "";
+  const sortBy = req.query.sortBy || "id";
+  const sort = req.query.sort || "ASC";
+
+  Recipe.getAllRecipesData(search, sortBy, sort)
     .then((result) => {
       if (result.length === 0) {
         helper.response(

@@ -1,15 +1,19 @@
 const connection = require("../config/database_connection");
 
 module.exports = {
-  getAllRecipesData: () => {
+  getAllRecipesData: (search, sortBy, sort) => {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT * FROM recipes`, [], (error, result) => {
-        if (!error) {
-          resolve(result);
-        } else {
-          reject(new Error(error));
+      connection.query(
+        `SELECT * FROM recipes WHERE recipe_name LIKE CONCAT('%',?,'%') ORDER BY ${sortBy} ${sort}`,
+        [search],
+        (error, result) => {
+          if (!error) {
+            resolve(result);
+          } else {
+            reject(new Error(error));
+          }
         }
-      });
+      );
     });
   },
   postNewRecipeData: (recipeData) => {
